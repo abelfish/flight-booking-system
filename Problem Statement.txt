@@ -7,7 +7,7 @@ The system should provide the following functionalities for Agents:
 - Agents should be able to search for available flights, considering factors such as flight capacity, flight date, departure location, and destination.
 - Agents should have the ability to create customer accounts within the system.
 - Agents should be able to cancel flight reservations.
-- Agents should have the capability to book flight reservations on behalf of customers.
+- Agents should have the capability to book flight reservations for a customer.
 - Agents should be able to authenticate themselves using their login credentials.
 
 The system should provide the following functionalities for Customers:
