@@ -7,7 +7,7 @@ The system should provide the following functionalities for Agents:
 - Agents should be able to search for available flights, considering factors such as flight capacity, flight date, departure location, and destination.
 - Agents should have the ability to create customer accounts within the system.
 - Agents should be able to cancel flight reservations.
-- Agents should have the capability to book flight reservations for a customer.
+- Agents should have the capability to book flight reservations on behalf of customers.
 - Agents should be able to authenticate themselves using their login credentials.
 
 The system should provide the following functionalities for Customers:
@@ -17,5 +17,10 @@ The system should provide the following functionalities for Customers:
 - Customers should be able to search for flights based on various criteria such as date, departure location, and destination.
 - Customers should be able to book flights and proceed with the payment process.
 - Customers should have the ability to manage their flight bookings.
+
+The system should provide the following functionalities for Admin:
+
+- Admin has all the privileges of an agent and a customer
+- Additionally, Admin can manage a flight route
 
 The flight booking system should ensure a user-friendly and intuitive interface for both Agents and Customers, streamlining the flight search, booking, and management procedures.
