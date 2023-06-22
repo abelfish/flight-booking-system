@@ -36,7 +36,7 @@ public class FlightSchedule {
     @NotNull(message = "Base price is required")
     private BigDecimal basePrice;
 
-//    @NotNull(message = "Flight Route is required")
+    @NotNull(message = "Flight Route is required")
     @ManyToOne
     @JsonIgnoreProperties("flightSchedules")
     private FlightRoute flightRoute;

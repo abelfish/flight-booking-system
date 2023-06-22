@@ -8,7 +8,7 @@ public record FlightScheduleDTO(Long id,
                                 LocalDate departureDate,
                                 Integer availableSeats,
                                 Integer maximumSeats,
-                                BigDecimal basePrice
-//                                FlightRouteDTO flightRouteDTO
-                                ) {
+                                BigDecimal basePrice,
+                                FlightRouteDTO flightRouteDTO
+) {
 }

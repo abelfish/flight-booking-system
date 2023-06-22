@@ -2,7 +2,9 @@ package edu.miu.cs425.flightbookingsystem.service;
 
 
 import edu.miu.cs425.flightbookingsystem.dto.FlightScheduleDTO;
+import org.springframework.data.domain.Page;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface FlightScheduleService {
@@ -16,4 +18,11 @@ public interface FlightScheduleService {
     FlightScheduleDTO updateFlightSchedule(Long id, FlightScheduleDTO flightScheduleDTO);
 
     void deleteFlightScheduleById(Long id);
+
+    Page<FlightScheduleDTO> getAllFlightSchedulesByFlightRouteId(Long flightRouteId, Integer pageNo,
+                                                                 Integer pageSize, String sortBy);
+
+    Page<FlightScheduleDTO> getAllByFlightRouteIdAndDepartureDate(Long flightRouteId,
+                                                                  LocalDate departureDate,
+                                                                  Integer pageNo, Integer pageSize, String sortBy);
 }

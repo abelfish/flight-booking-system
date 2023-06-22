@@ -1,6 +1,5 @@
 package edu.miu.cs425.flightbookingsystem.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -29,7 +28,6 @@ public class FlightRoute {
 
     @NotBlank(message = "Arrival City is required")
     private String arrivalCity;
-
     @NotBlank(message = "Flight Number is required")
     private String flightNumber;
 
@@ -39,8 +37,8 @@ public class FlightRoute {
     @NotNull(message = "Arrival Time is required")
     private LocalTime arrivalTime;
 
-    @OneToMany(mappedBy = "flightRoute")
-    @JsonIgnoreProperties("flightRoute")
+    @OneToMany(mappedBy = "flightRoute", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch =
+            FetchType.EAGER)
     private List<FlightSchedule> flightSchedules = new ArrayList<>();
 
     public String flightStatus() {

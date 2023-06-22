@@ -3,7 +3,7 @@ package edu.miu.cs425.flightbookingsystem.service.impl;
 import edu.miu.cs425.flightbookingsystem.dto.FlightRouteDTO;
 import edu.miu.cs425.flightbookingsystem.repository.FlightRouteRepository;
 import edu.miu.cs425.flightbookingsystem.service.FlightRouteService;
-import edu.miu.cs425.flightbookingsystem.service.config.FlightRouteMapper;
+import edu.miu.cs425.flightbookingsystem.service.mappers.FlightRouteMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +35,9 @@ public class FlightRouteServiceImpl implements FlightRouteService {
     @Override
     public FlightRouteDTO addFlightRoute(FlightRouteDTO flightRouteDTO) {
         var flightRoute = FlightRouteMapper.toFlightRoute(flightRouteDTO);
+        for (var flightSchedule : flightRoute.getFlightSchedules()) {
+            flightSchedule.setFlightRoute(flightRoute);
+        }
         var savedFlightRoute = flightRouteRepository.save(flightRoute);
         return FlightRouteMapper.toFlightRouteDTO(savedFlightRoute);
     }

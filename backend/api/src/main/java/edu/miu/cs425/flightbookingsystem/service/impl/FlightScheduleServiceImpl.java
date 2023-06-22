@@ -1,13 +1,17 @@
 package edu.miu.cs425.flightbookingsystem.service.impl;
 
 import edu.miu.cs425.flightbookingsystem.dto.FlightScheduleDTO;
-import edu.miu.cs425.flightbookingsystem.model.FlightSchedule;
 import edu.miu.cs425.flightbookingsystem.repository.FlightScheduleRepository;
 import edu.miu.cs425.flightbookingsystem.service.FlightScheduleService;
-import edu.miu.cs425.flightbookingsystem.service.config.FlightScheduleMapper;
+import edu.miu.cs425.flightbookingsystem.service.mappers.FlightScheduleMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -15,17 +19,18 @@ import java.util.List;
 public class FlightScheduleServiceImpl implements FlightScheduleService {
 
     private final FlightScheduleRepository flightScheduleRepository;
+
     @Override
     public List<FlightScheduleDTO> getAllFlightSchedules() {
         var flightSchedules = flightScheduleRepository.findAll();
         return flightSchedules.stream()
-                .map(FlightScheduleMapper::toFLightScheduleDTO).toList();
+                .map(FlightScheduleMapper::toFlightScheduleDTO).toList();
     }
 
     @Override
     public FlightScheduleDTO getFlightScheduleById(Long id) {
         return flightScheduleRepository.findById(id)
-                .map(FlightScheduleMapper::toFLightScheduleDTO)
+                .map(FlightScheduleMapper::toFlightScheduleDTO)
                 .orElseThrow(() -> new RuntimeException("Flight schedule not found"));
     }
 
@@ -33,7 +38,7 @@ public class FlightScheduleServiceImpl implements FlightScheduleService {
     public FlightScheduleDTO addFlightSchedule(FlightScheduleDTO flightScheduleDTO) {
         var flightSchedule = FlightScheduleMapper.toFlightSchedule(flightScheduleDTO);
         return FlightScheduleMapper
-                .toFLightScheduleDTO(flightScheduleRepository.save(flightSchedule));
+                .toFlightScheduleDTO(flightScheduleRepository.save(flightSchedule));
     }
 
     @Override
@@ -42,11 +47,31 @@ public class FlightScheduleServiceImpl implements FlightScheduleService {
         var flightSchedule = FlightScheduleMapper.toFlightSchedule(flightScheduleDTO);
         flightSchedule.setId(id);
         return FlightScheduleMapper
-                .toFLightScheduleDTO(flightScheduleRepository.save(flightSchedule));
+                .toFlightScheduleDTO(flightScheduleRepository.save(flightSchedule));
     }
 
     @Override
     public void deleteFlightScheduleById(Long id) {
         flightScheduleRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<FlightScheduleDTO> getAllFlightSchedulesByFlightRouteId(Long flightRouteId,
+                                                                        Integer pageNo, Integer pageSize, String sortBy) {
+
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+        return flightScheduleRepository
+                .findAllByFlightRouteId(flightRouteId, pageable)
+                .map(FlightScheduleMapper::toFlightScheduleDTO);
+
+    }
+
+    @Override
+    public Page<FlightScheduleDTO> getAllByFlightRouteIdAndDepartureDate(Long flightRouteId,
+                                                                         LocalDate departureDate,
+                                                                         Integer pageNo, Integer pageSize, String sortBy) {
+        return flightScheduleRepository.findAllByFlightRouteIdAndDepartureDate(flightRouteId, departureDate,
+                        PageRequest.of(pageNo, pageSize, Sort.by(sortBy)))
+                .map(FlightScheduleMapper::toFlightScheduleDTO);
     }
 }

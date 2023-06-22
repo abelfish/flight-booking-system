@@ -1,4 +1,4 @@
-package edu.miu.cs425.flightbookingsystem.service.config;
+package edu.miu.cs425.flightbookingsystem.service.mappers;
 
 import edu.miu.cs425.flightbookingsystem.dto.FlightRouteDTO;
 import edu.miu.cs425.flightbookingsystem.model.FlightRoute;
@@ -19,7 +19,7 @@ public class FlightRouteMapper {
                 Optional.ofNullable(flightRoute.getFlightSchedules())
                         .orElse(new ArrayList<>())
                         .stream()
-                        .map(FlightScheduleMapper::toFLightScheduleDTO).toList()
+                        .map(FlightScheduleMapper::toFlightScheduleDTO).toList()
         );
     }
 
