@@ -6,12 +6,14 @@ Content-Type: application/json
   "availableSeats": 100,
   "maximumSeats": 100,
   "basePrice": 136.90,
-  "flightRoute": {
+  "flightRouteDTO": {
+    "id": 1,
     "departureCity": "LHR",
-    "arrivalCity": "Amsterdam",
+    "arrivalCity": "AMS",
+    "flightNumber": "BA",
     "departureTime": "10:00:00",
     "arrivalTime": "11:00:00",
-    "flightNumber": "BA"
+    "flightScheduleDTOS": []
   }
 }
 

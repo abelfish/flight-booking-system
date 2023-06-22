@@ -1,6 +1,7 @@
 package edu.miu.cs425.flightbookingsystem.dto;
 
 import java.time.LocalTime;
+import java.util.List;
 
 public record FlightRouteDTO(
         Long id,
@@ -8,5 +9,6 @@ public record FlightRouteDTO(
         String arrivalCity,
         String flightNumber,
         LocalTime departureTime,
-        LocalTime arrivalTime) {
+        LocalTime arrivalTime,
+        List<FlightScheduleDTO> flightScheduleDTOS) {
 }

@@ -3,6 +3,9 @@ package edu.miu.cs425.flightbookingsystem.service.config;
 import edu.miu.cs425.flightbookingsystem.dto.FlightRouteDTO;
 import edu.miu.cs425.flightbookingsystem.model.FlightRoute;
 
+import java.util.ArrayList;
+import java.util.Optional;
+
 public class FlightRouteMapper {
 
     public static FlightRouteDTO toFlightRouteDTO(FlightRoute flightRoute) {
@@ -12,7 +15,11 @@ public class FlightRouteMapper {
                 flightRoute.getArrivalCity(),
                 flightRoute.getFlightNumber(),
                 flightRoute.getDepartureTime(),
-                flightRoute.getArrivalTime()
+                flightRoute.getArrivalTime(),
+                Optional.ofNullable(flightRoute.getFlightSchedules())
+                        .orElse(new ArrayList<>())
+                        .stream()
+                        .map(FlightScheduleMapper::toFLightScheduleDTO).toList()
         );
     }
 
@@ -23,7 +30,10 @@ public class FlightRouteMapper {
                 flightRouteDTO.arrivalCity(),
                 flightRouteDTO.flightNumber(),
                 flightRouteDTO.departureTime(),
-                flightRouteDTO.arrivalTime()
-        );
+                flightRouteDTO.arrivalTime(),
+                Optional.ofNullable(flightRouteDTO.flightScheduleDTOS())
+                        .orElse(new ArrayList<>())
+                        .stream()
+                        .map(FlightScheduleMapper::toFlightSchedule).toList());
     }
 }
