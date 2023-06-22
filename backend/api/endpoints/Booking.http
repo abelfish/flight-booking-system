@@ -1,0 +1,31 @@
+### Add a new booking
+POST http://localhost:8080/api/bookings
+Content-Type: application/json
+
+{
+      "bookingDate": "2020-01-01",
+        "bookingTime": "10:00",
+        "duration": 60,
+        "customerId": 1
+}
+
+### Get all bookings
+GET http://localhost:8080/api/bookings
+
+### Get a booking by id
+GET http://localhost:8080/api/bookings/1
+
+### Update a booking
+PUT http://localhost:8080/api/bookings/1
+Content-Type: application/json
+
+{
+      "bookingDate": "2020-01-01",
+        "bookingTime": "10:00",
+        "duration": 60,
+        "customerId": 1
+}
+
+### Delete a booking
+DELETE http://localhost:8080/api/bookings/1
+

@@ -1,0 +1,42 @@
+POST http://localhost:8080/api/flight-schedules
+Content-Type: application/json
+
+{
+  "departureDate": "2023-01-01",
+  "availableSeats": 100,
+  "maximumSeats": 100,
+  "basePrice": 136.90,
+  "flightRoute": {
+    "departureCity": "LHR",
+    "arrivalCity": "Amsterdam",
+    "departureTime": "10:00:00",
+    "arrivalTime": "11:00:00",
+    "flightNumber": "BA"
+  }
+}
+
+### Get all flight schedules
+GET http://localhost:8080/api/flight-schedules
+
+### Get flight schedule by id
+GET http://localhost:8080/api/flight-schedules/1
+
+### Update flight schedule
+PUT http://localhost:8080/api/flight-schedules/1
+
+{
+  "departureDate": "2023-01-01",
+  "availableSeats": 100,
+  "maximumSeats": 100,
+  "basePrice": 136.90,
+  "flightRoute": {
+    "departureCity": "LHR",
+    "arrivalCity": "Amsterdam",
+    "departureTime": "10:00:00",
+    "arrivalTime": "11:00:00",
+    "flightNumber": "BA"
+  }
+}
+
+### Delete flight schedule
+DELETE http://localhost:8080/api/flight-schedules/1
