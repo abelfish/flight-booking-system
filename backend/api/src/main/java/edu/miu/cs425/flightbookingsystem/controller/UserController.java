@@ -1,8 +1,7 @@
 package edu.miu.cs425.flightbookingsystem.controller;
 
-import edu.miu.cs425.flightbookingsystem.model.User;
+import edu.miu.cs425.flightbookingsystem.dto.UserDTO;
 import edu.miu.cs425.flightbookingsystem.service.UserService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
 
-    @RequestMapping(value = {"/"})
+    @GetMapping
     public ResponseEntity<?> getAllUsers() {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
-    @PostMapping(value = {"/"})
-    public ResponseEntity<?> addNewUser(@RequestBody User newUser) {
+    @PostMapping
+    public ResponseEntity<?> addNewUser(@RequestBody UserDTO newUser) {
         return new ResponseEntity<>(userService.addUser(newUser), HttpStatus.CREATED);
     }
 
@@ -34,7 +33,7 @@ public class UserController {
     }
 
     @PutMapping(value = {"/{userId}"})
-    public ResponseEntity<?> updateUserById(@PathVariable Long userId, @RequestBody User user) {
+    public ResponseEntity<?> updateUserById(@PathVariable Long userId, @RequestBody UserDTO user) {
         try {
             return new ResponseEntity<>(userService.updateUserById(userId, user), HttpStatus.OK);
         } catch (RuntimeException e) {
@@ -42,14 +41,6 @@ public class UserController {
         }
     }
 
-    @PutMapping(value = {"/"})
-    public ResponseEntity<?> updateUser(@RequestBody User user) {
-        try {
-            return new ResponseEntity<>(userService.updateUser(user), HttpStatus.OK);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
-    }
 
     @DeleteMapping(value = {"/{userId}"})
     public ResponseEntity<?> deleteUser(@PathVariable Long userId) {

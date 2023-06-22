@@ -1,17 +1,20 @@
 package edu.miu.cs425.flightbookingsystem.service;
 
-import edu.miu.cs425.flightbookingsystem.model.Customer;
+import edu.miu.cs425.flightbookingsystem.dto.CustomerDTO;
 
 import java.util.List;
 
 public interface CustomerService {
-    Customer addCustomer(Customer newCustomer);
-    Customer getCustomerById(Long id);
-    Customer updateCustomerById(Long customerId, Customer customer);
-    Customer updateCustomer(Customer customer);
+    CustomerDTO addCustomer(CustomerDTO newCustomerDTO);
+
+    CustomerDTO getCustomerById(Long id);
+
+    CustomerDTO updateCustomerById(Long customerId, CustomerDTO CustomerDTO);
+
     void deleteCustomerById(Long customerId);
 
-    List<Customer> getAllCustomers();
+    List<CustomerDTO> getAllCustomers();
+
     List<Object[]> generateReport();
 
 }
