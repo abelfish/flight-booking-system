@@ -1,4 +1,4 @@
-###Post Employee
+###Post Customer
 POST http://localhost:8080/api/customers
 
 
@@ -8,13 +8,13 @@ POST http://localhost:8080/api/customers
     "email": "
 }
 
-### Get all employees
+### Get all customers
 GET http://localhost:8080/api/customers
 
-### Get employee by id
+### Get customer by id
 GET http://localhost:8080/api/customers/1
 
-### Update employee
+### Update customer
 PUT http://localhost:8080/api/customers/1
 
 {
@@ -23,5 +23,5 @@ PUT http://localhost:8080/api/customers/1
     "email": ""
 }
 
-### Delete employee
+### Delete customer
 DELETE http://localhost:8080/api/customers/1

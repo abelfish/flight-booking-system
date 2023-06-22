@@ -29,8 +29,7 @@ public class Customer {
 //    @JsonIgnoreProperties("customer")
 
     private Address address;
-//    @JsonIgnoreProperties("customer")
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "user_id", referencedColumnName = "userId", nullable = true)
-//    private User user;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "userId", nullable = true)
+    private User user;
 }

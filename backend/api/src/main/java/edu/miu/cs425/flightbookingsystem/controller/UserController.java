@@ -2,27 +2,29 @@ package edu.miu.cs425.flightbookingsystem.controller;
 
 import edu.miu.cs425.flightbookingsystem.model.User;
 import edu.miu.cs425.flightbookingsystem.service.UserService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/users")
+@RequiredArgsConstructor
 public class UserController {
+
     private final UserService userService;
 
-    @RequestMapping(value = {"/"})
-    public ResponseEntity<?> getAllUsers() {
-        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
-    }
 
     @PostMapping(value = {"/"})
     public ResponseEntity<?> addNewUser(@RequestBody User newUser) {
         return new ResponseEntity<>(userService.addUser(newUser), HttpStatus.CREATED);
     }
+
+    @GetMapping(value = {"/"})
+    public ResponseEntity<?> listUsers() {
+        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+    }
+
 
     @GetMapping(value = {"/{userId}"})
     public ResponseEntity<?> getUserById(@PathVariable Long userId) {
@@ -41,7 +43,6 @@ public class UserController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
-
     @PutMapping(value = {"/"})
     public ResponseEntity<?> updateUser(@RequestBody User user) {
         try {
@@ -60,6 +61,12 @@ public class UserController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
+
+
+
+
+
+
 
 
 }
