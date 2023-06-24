@@ -1,5 +1,6 @@
 package edu.miu.cs425.flightbookingsystem.service;
 
+import edu.miu.cs425.flightbookingsystem.dto.AuthenticationResponse;
 import edu.miu.cs425.flightbookingsystem.dto.UserDTO;
 
 import java.util.List;
@@ -15,5 +16,9 @@ public interface UserService {
     void deleteUserById(Long userId);
 
     List<UserDTO> getAllUsers();
-//    List<Object[]> generateReport();
+
+    AuthenticationResponse login(UserDTO userDTO);
+
+    UserDTO findByUsername(String username);
+
 }

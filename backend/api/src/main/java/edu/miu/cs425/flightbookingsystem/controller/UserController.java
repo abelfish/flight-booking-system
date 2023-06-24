@@ -7,15 +7,27 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/users")
 public class UserController {
     private final UserService userService;
 
+
     @GetMapping
     public ResponseEntity<?> getAllUsers() {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+    }
+
+    @PostMapping(value = {"/login"})
+    public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
+        try {
+            return ResponseEntity.accepted().body(userService.login(userDTO));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping
@@ -47,6 +59,15 @@ public class UserController {
         try {
             userService.deleteUserById(userId);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping(value = {"/username/{username}"})
+    public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
+        try {
+            return new ResponseEntity<>(userService.findByUsername(username), HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }

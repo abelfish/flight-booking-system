@@ -11,11 +11,12 @@ import java.time.LocalDate;
 
 public interface FlightScheduleRepository extends JpaRepository<FlightSchedule, Long> {
 
-    @Query("SELECT fs FROM FlightSchedule fs WHERE fs.flightRoute.id = :flightRouteId")
-    Page<FlightSchedule> findAllByFlightRouteId(@Param("flightRouteId") Long flightRouteId,
-                                                Pageable pageable);
+    @Query("SELECT fs FROM FlightSchedule fs WHERE fs.flightRoute.departureCity = :departureCity AND fs.flightRoute.arrivalCity = :arrivalCity")
+    Page<FlightSchedule> findAllByDepartureAndArrival(@Param("departureCity") String departureCity, @Param("arrivalCity") String arrivalCity, Pageable pageable);
 
-    @Query("SELECT fs FROM FlightSchedule fs WHERE fs.flightRoute.id = :flightRouteId AND fs.departureDate = :departureDate")
-    Page<FlightSchedule> findAllByFlightRouteIdAndDepartureDate(@Param("flightRouteId") Long flightRouteId, @Param("departureDate") LocalDate departureDate,
-                                                                Pageable pageable);
+    @Query("SELECT fs FROM FlightSchedule fs WHERE fs.flightRoute.departureCity = :departureCity " +
+            "AND fs.flightRoute.arrivalCity = :arrivalCity" +
+            " AND fs.departureDate = :departureDate")
+    Page<FlightSchedule> findAllByDepartureAndArrivalAndDepartureDate(@Param("departureCity") String departureCity, @Param("arrivalCity") String arrivalCity, @Param("departureDate") LocalDate departureDate,
+                                                                      Pageable pageable);
 }

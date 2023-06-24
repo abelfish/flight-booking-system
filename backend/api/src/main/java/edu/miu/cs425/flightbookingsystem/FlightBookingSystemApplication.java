@@ -1,9 +1,11 @@
 package edu.miu.cs425.flightbookingsystem;
 
 import com.github.javafaker.Faker;
-import edu.miu.cs425.flightbookingsystem.dto.FlightRouteDTO;
-import edu.miu.cs425.flightbookingsystem.dto.FlightScheduleDTO;
+import edu.miu.cs425.flightbookingsystem.dto.*;
+import edu.miu.cs425.flightbookingsystem.model.Role;
+import edu.miu.cs425.flightbookingsystem.service.CustomerService;
 import edu.miu.cs425.flightbookingsystem.service.FlightRouteService;
+import edu.miu.cs425.flightbookingsystem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -22,9 +24,35 @@ public class FlightBookingSystemApplication implements ApplicationRunner {
 
     private final Faker faker;
     private final FlightRouteService flightRouteService;
+    private final CustomerService customerService;
+    private final UserService userService;
 
     public static void main(String[] args) {
         SpringApplication.run(FlightBookingSystemApplication.class, args);
+    }
+
+    void populateCustomers() {
+        IntStream.range(0, 10).mapToObj(i -> new CustomerDTO(null,
+                faker.name().firstName(),
+                faker.name().lastName(),
+                LocalDate.of(faker.number().numberBetween(1950, 2000), faker.number().numberBetween(1, 12), faker.number().numberBetween(1, 28)),
+                new AddressDTO(null,
+                        faker.address().streetAddress(),
+                        faker.address().city(),
+                        faker.address().state(),
+                        faker.address().zipCode()),
+                new UserDTO(null,
+                        faker.name().username().toLowerCase(), faker.internet().emailAddress(),
+                        faker.internet().password(), Role.CUSTOMER))).forEach(customerService::addCustomer);
+
+    }
+
+    void populateUsers() {
+        var admin = new UserDTO(null, "admin", "admin@natna.com", "admin", Role.ADMIN);
+        userService.addUser(admin);
+
+        var agent = new UserDTO(null, "agent", "agent@natna.com", "agent", Role.AGENT);
+        userService.addUser(agent);
     }
 
     void populateFlightRoutes() {
@@ -57,6 +85,16 @@ public class FlightBookingSystemApplication implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         if (flightRouteService.getAllFlightRoutes().isEmpty())
             populateFlightRoutes();
+
+        if (customerService.getAllCustomers().isEmpty())
+            populateCustomers();
+
+        var isAdminOrAgentFound =
+                userService.getAllUsers().stream().anyMatch(userDTO -> userDTO.role()
+                        == Role.ADMIN || userDTO.role() == Role.AGENT);
+
+        if (!isAdminOrAgentFound)
+            populateUsers();
     }
 
 

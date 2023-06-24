@@ -56,21 +56,20 @@ public class FlightScheduleServiceImpl implements FlightScheduleService {
     }
 
     @Override
-    public Page<FlightScheduleDTO> getAllFlightSchedulesByFlightRouteId(Long flightRouteId,
-                                                                        Integer pageNo, Integer pageSize, String sortBy) {
+    public Page<FlightScheduleDTO> getAllFlightSchedulesByDepartureCityAndArrivalCity(String departureCity, String arrivalCity, Integer pageNo, Integer pageSize, String sortBy) {
 
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         return flightScheduleRepository
-                .findAllByFlightRouteId(flightRouteId, pageable)
+                .findAllByDepartureAndArrival(departureCity, arrivalCity, pageable)
                 .map(FlightScheduleMapper::toFlightScheduleDTO);
 
     }
 
     @Override
-    public Page<FlightScheduleDTO> getAllByFlightRouteIdAndDepartureDate(Long flightRouteId,
-                                                                         LocalDate departureDate,
-                                                                         Integer pageNo, Integer pageSize, String sortBy) {
-        return flightScheduleRepository.findAllByFlightRouteIdAndDepartureDate(flightRouteId, departureDate,
+    public Page<FlightScheduleDTO> getAllByDepartureCityAndArrivalCityAndDepartureDate(String departureCity, String arrivalCity, LocalDate departureDate, Integer pageNo, Integer pageSize, String sortBy) {
+
+        return flightScheduleRepository.findAllByDepartureAndArrivalAndDepartureDate(departureCity,
+                        arrivalCity, departureDate,
                         PageRequest.of(pageNo, pageSize, Sort.by(sortBy)))
                 .map(FlightScheduleMapper::toFlightScheduleDTO);
     }

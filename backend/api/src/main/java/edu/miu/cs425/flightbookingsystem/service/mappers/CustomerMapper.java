@@ -10,20 +10,20 @@ public class CustomerMapper {
     public static CustomerDTO toCustomerDTO(Customer customer) {
         return new CustomerDTO(customer.getId(), customer.getFirstName(), customer.getLastName(),
                 customer.getDateOfBirth(),
-                Optional.of(customer.getAddress())
+                Optional.ofNullable(customer.getAddress())
                         .map(AddressMapper::toAddressDTO)
                         .orElse(null),
-                Optional.of(customer.getUser())
+                Optional.ofNullable(customer.getUser())
                         .map(UserMapper::toUserDTO).orElse(null));
     }
 
     public static Customer toCustomer(CustomerDTO customerDTO) {
         return new Customer(customerDTO.id(), customerDTO.firstName(), customerDTO.lastName(),
                 customerDTO.dateOfBirth(),
-                Optional.of(customerDTO.addressDTO())
+                Optional.ofNullable(customerDTO.addressDTO())
                         .map(AddressMapper::toAddress)
                         .orElse(null),
-                Optional.of(customerDTO.userDTO())
+                Optional.ofNullable(customerDTO.userDTO())
                         .map(UserMapper::toUser).orElse(null));
     }
 }

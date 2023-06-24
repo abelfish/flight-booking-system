@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/flight-schedules")
@@ -51,17 +52,17 @@ public class FlightScheduleController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<?> getAllFlightSchedulesByFlightRouteId(@RequestParam Long flightRouteId,
+    public ResponseEntity<?> getAllFlightSchedulesByFlightRouteInfo(@RequestParam String departureCity, @RequestParam String arrivalCity,
 
-                                                                  @RequestParam(defaultValue = "0") Integer pageNo,
-                                                                  @RequestParam(defaultValue = "10") Integer pageSize,
-                                                                  @RequestParam(defaultValue = "departureDate") String sortBy,
-                                                                  @RequestParam(defaultValue = "") LocalDate departureDate) {
-        if (flightRouteId == null)
-            return ResponseEntity.badRequest().body("Flight route id is required");
+                                                                    @RequestParam(defaultValue = "0") Integer pageNo,
+                                                                    @RequestParam(defaultValue = "10") Integer pageSize,
+                                                                    @RequestParam(defaultValue = "departureDate") String sortBy,
+                                                                    @RequestParam(defaultValue = "") LocalDate departureDate) {
         if (departureDate == null)
-            return ResponseEntity.ok(flightScheduleService.getAllFlightSchedulesByFlightRouteId(flightRouteId, pageNo, pageSize, sortBy));
-        return ResponseEntity.ok(flightScheduleService.getAllByFlightRouteIdAndDepartureDate(flightRouteId, departureDate, pageNo, pageSize, sortBy));
+            return ResponseEntity.ok(flightScheduleService.getAllFlightSchedulesByDepartureCityAndArrivalCity(departureCity, arrivalCity
+                    , pageNo, pageSize, sortBy));
+        return ResponseEntity.ok(flightScheduleService.getAllByDepartureCityAndArrivalCityAndDepartureDate(departureCity, arrivalCity,
+                departureDate, pageNo, pageSize, sortBy));
     }
 
 }

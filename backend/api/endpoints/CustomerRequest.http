@@ -12,11 +12,6 @@ Content-Type:application/json
     "city": "New York",
     "state": "NY",
     "zipCode": "10001"
-  },
-  "userDTO": {
-    "username": "jdoe",
-    "password": "password",
-    "role": "CUSTOMER"
   }
 }
 
@@ -41,13 +36,6 @@ Content-Type:application/json
     "city": "New ",
     "state": "NY",
     "zipCode": "10001"
-  },
-  "userDTO": {
-    "id": 1,
-    "username": "jdoe",
-    "email": null,
-    "password": "password",
-    "role": "CUSTOMER"
   }
 }
 

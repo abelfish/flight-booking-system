@@ -19,10 +19,7 @@ public interface FlightScheduleService {
 
     void deleteFlightScheduleById(Long id);
 
-    Page<FlightScheduleDTO> getAllFlightSchedulesByFlightRouteId(Long flightRouteId, Integer pageNo,
-                                                                 Integer pageSize, String sortBy);
+    Page<FlightScheduleDTO> getAllFlightSchedulesByDepartureCityAndArrivalCity(String departureCity, String arrivalCity, Integer pageNo, Integer pageSize, String sortBy);
 
-    Page<FlightScheduleDTO> getAllByFlightRouteIdAndDepartureDate(Long flightRouteId,
-                                                                  LocalDate departureDate,
-                                                                  Integer pageNo, Integer pageSize, String sortBy);
+    Page<FlightScheduleDTO> getAllByDepartureCityAndArrivalCityAndDepartureDate(String departureCity, String arrivalCity, LocalDate departureDate, Integer pageNo, Integer pageSize, String sortBy);
 }

@@ -6,6 +6,7 @@ import edu.miu.cs425.flightbookingsystem.repository.CustomerRepository;
 import edu.miu.cs425.flightbookingsystem.service.CustomerService;
 import edu.miu.cs425.flightbookingsystem.service.mappers.CustomerMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<CustomerDTO> getAllCustomers() {
@@ -31,7 +33,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO addCustomer(CustomerDTO newCustomerDTO) {
         var customer = CustomerMapper.toCustomer(newCustomerDTO);
-        customer.getUser().setRole(Role.CUSTOMER);
+        if (customer.getUser() != null)
+            customer.getUser().setRole(Role.CUSTOMER);
+        customer.getUser().setPassword(passwordEncoder.encode(customer.getUser().getPassword()));
         return CustomerMapper.toCustomerDTO(customerRepository.save(customer));
     }
 

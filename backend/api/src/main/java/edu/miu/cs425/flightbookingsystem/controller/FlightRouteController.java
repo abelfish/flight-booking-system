@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalTime;
+import java.util.HashMap;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/flight-routes")
@@ -61,7 +63,9 @@ public class FlightRouteController {
 
     @GetMapping("/status")
     public ResponseEntity<?> findFlightStatusByFlightNumber(@RequestParam String flightNumber) {
-        return ResponseEntity.ok(flightRouteService.findFlightStatusByFlightNumber(flightNumber));
+        var messages = new HashMap<>();
+        messages.put("status", flightRouteService.findFlightStatusByFlightNumber(flightNumber));
+        return ResponseEntity.ok(messages);
     }
 
 }
