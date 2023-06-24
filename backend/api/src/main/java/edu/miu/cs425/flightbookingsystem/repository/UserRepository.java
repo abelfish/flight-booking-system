@@ -3,4 +3,12 @@ package edu.miu.cs425.flightbookingsystem.repository;
 import edu.miu.cs425.flightbookingsystem.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> 
+
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    boolean existsByUsername(String email);
+
+    Optional<User> findByUsername(String username);
+}
+

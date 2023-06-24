@@ -3,15 +3,17 @@ Content-Type: application/json
 
 {
   "departureDate": "2023-01-01",
-  "availableSeats": 100,
-  "maximumSeats": 100,
+  "availableSeats": 10,
+  "maximumSeats": 10,
   "basePrice": 136.90,
-  "flightRoute": {
+  "flightRouteDTO": {
+    "id": 31,
     "departureCity": "LHR",
-    "arrivalCity": "Amsterdam",
+    "arrivalCity": "AMS",
+    "flightNumber": "BA",
     "departureTime": "10:00:00",
     "arrivalTime": "11:00:00",
-    "flightNumber": "BA"
+    "flightScheduleDTOS": []
   }
 }
 
@@ -19,24 +21,31 @@ Content-Type: application/json
 GET http://localhost:8080/api/flight-schedules
 
 ### Get flight schedule by id
-GET http://localhost:8080/api/flight-schedules/1
+GET http://localhost:8080/api/flight-schedules/901
 
 ### Update flight schedule
 PUT http://localhost:8080/api/flight-schedules/1
+Content-Type: application/json
 
 {
+  "id": 902,
   "departureDate": "2023-01-01",
-  "availableSeats": 100,
+  "availableSeats": 10,
   "maximumSeats": 100,
   "basePrice": 136.90,
-  "flightRoute": {
+  "flightRouteDTO": {
+    "id": 31,
     "departureCity": "LHR",
-    "arrivalCity": "Amsterdam",
+    "arrivalCity": "AMS",
+    "flightNumber": "BA",
     "departureTime": "10:00:00",
     "arrivalTime": "11:00:00",
-    "flightNumber": "BA"
+    "flightScheduleDTOS": null
   }
 }
 
 ### Delete flight schedule
-DELETE http://localhost:8080/api/flight-schedules/1
+DELETE http://localhost:8080/api/flight-schedules/901
+
+### Search flight schedules
+GET http://localhost:8080/api/flight-schedules/search?flightRouteId=1

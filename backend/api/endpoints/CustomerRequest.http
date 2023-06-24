@@ -1,11 +1,20 @@
+
 ###Post Customer
+
 POST http://localhost:8080/api/customers
+Content-Type:application/json
 
 
 {
-    "firstName": "John",
-    "lastName": "Doe",
-    "email": "
+  "firstName": "James",
+  "lastName": "Doe",
+  "dateOfBirth": "1990-01-01",
+  "addressDTO": {
+    "street": "123 Main St",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001"
+  }
 }
 
 ### Get all customers
@@ -16,11 +25,20 @@ GET http://localhost:8080/api/customers/1
 
 ### Update customer
 PUT http://localhost:8080/api/customers/1
+Content-Type:application/json
 
 {
-    "firstName": "James",
-    "lastName": "Doe",
-    "email": ""
+  "id": 1,
+  "firstName": "James",
+  "lastName": "Ffsaf",
+  "dateOfBirth": "1990-01-01",
+  "addressDTO": {
+    "id": 1,
+    "street": "123 Main St",
+    "city": "New ",
+    "state": "NY",
+    "zipCode": "10001"
+  }
 }
 
 ### Delete customer
