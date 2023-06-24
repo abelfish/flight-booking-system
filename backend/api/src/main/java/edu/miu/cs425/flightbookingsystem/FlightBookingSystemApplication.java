@@ -1,5 +1,6 @@
 package edu.miu.cs425.flightbookingsystem;
 
+
 import com.github.javafaker.Faker;
 import edu.miu.cs425.flightbookingsystem.dto.*;
 import edu.miu.cs425.flightbookingsystem.model.Role;
@@ -9,6 +10,7 @@ import edu.miu.cs425.flightbookingsystem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -20,6 +22,7 @@ import java.util.stream.IntStream;
 
 @RequiredArgsConstructor
 @SpringBootApplication
+
 public class FlightBookingSystemApplication implements ApplicationRunner {
 
     private final Faker faker;
@@ -98,4 +101,6 @@ public class FlightBookingSystemApplication implements ApplicationRunner {
     }
 
 
+
+	
 }

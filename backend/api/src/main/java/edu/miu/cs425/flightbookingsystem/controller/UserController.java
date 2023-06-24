@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/users")
+@RequiredArgsConstructor
 public class UserController {
+
     private final UserService userService;
+
 
 
     @GetMapping
@@ -35,6 +37,12 @@ public class UserController {
         return new ResponseEntity<>(userService.addUser(newUser), HttpStatus.CREATED);
     }
 
+    @GetMapping(value = {"/"})
+    public ResponseEntity<?> listUsers() {
+        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+    }
+
+
     @GetMapping(value = {"/{userId}"})
     public ResponseEntity<?> getUserById(@PathVariable Long userId) {
         try {
@@ -54,8 +62,11 @@ public class UserController {
     }
 
 
+
     @DeleteMapping(value = {"/{userId}"})
     public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
+
+
         try {
             userService.deleteUserById(userId);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -72,6 +83,12 @@ public class UserController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
+
+
+
+
+
+
 
 
 }

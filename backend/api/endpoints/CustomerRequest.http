@@ -1,4 +1,6 @@
-###Post customer
+
+###Post Customer
+
 POST http://localhost:8080/api/customers
 Content-Type:application/json
 
@@ -39,5 +41,5 @@ Content-Type:application/json
   }
 }
 
-### Delete employee
+### Delete customer
 DELETE http://localhost:8080/api/customers/1

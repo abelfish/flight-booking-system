@@ -1,5 +1,6 @@
 package edu.miu.cs425.flightbookingsystem.service.impl;
 
+
 import edu.miu.cs425.flightbookingsystem.dto.AuthenticationResponse;
 import edu.miu.cs425.flightbookingsystem.dto.UserDTO;
 import edu.miu.cs425.flightbookingsystem.model.User;
@@ -14,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
@@ -64,6 +67,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
+
     @Override
     public void deleteUserById(Long userId) {
         userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
@@ -96,6 +100,7 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException("User Not Found");
         }
     }
+
 
 
 }
